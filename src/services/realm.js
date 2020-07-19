@@ -1,0 +1,11 @@
+import Realm from 'realm';
+import UserSchema from '~/schemas/UserSchema';
+import ContactSchema from '~/schemas/ContactSchema';
+import TransactionSchema from '~/schemas/TransactionSchema';
+
+export default function getRealm() {
+  return Realm.open({
+    schema: [UserSchema, ContactSchema, TransactionSchema],
+    schemaVersion: 1,
+  });
+}

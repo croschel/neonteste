@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Background from '../../components/Background';
-// import { MaterialIcons } from 'react-native-vector-icons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import { BarChart } from 'react-native-chart-kit';
 import { Dimensions, ScrollView } from 'react-native';
@@ -38,11 +38,7 @@ function Historic() {
     <Background>
       <HeaderBox>
         <BackButton onPress={goBack}>
-          {/* <MaterialIcons
-            name="keyboard-arrow-left"
-            size={50}
-            color="#fff"
-          /> */}
+          <Icon name="keyboard-arrow-left" size={50} color="#fff" />
         </BackButton>
         <HeaderTitle>HISTÓRICO DE EVENTOS</HeaderTitle>
       </HeaderBox>
@@ -78,10 +74,13 @@ function Historic() {
               paddingTop: 10,
               borderTopColor: '#085a6b',
             }}>
-            <Avatar
-              source={{ uri: 'https://api.adorable.io/avatars/80/neon.png' }}
-            />
-
+            <LinearGradient
+              colors={['#053e57', '#00fcc2']}
+              style={{ borderRadius: 37, width: 76, height: 76 }}>
+              <Avatar
+                source={{ uri: 'https://api.adorable.io/avatars/80/neon.png' }}
+              />
+            </LinearGradient>
             <InfoBox>
               <Name>Anderson Santos</Name>
               <Phone>(11)98456-8745</Phone>

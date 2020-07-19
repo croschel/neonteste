@@ -10,8 +10,7 @@ export const Container = styled.View`
 export const Avatar = styled.Image`
   width: 180px;
   height: 180px;
-  borderRadius: 90px;
-  elevation: 4;
+  border-radius: 90px;
   margin: auto auto;
 `;
 export const PersonBox = styled.View`
@@ -30,17 +29,12 @@ export const Email = styled.Text`
 `;
 export const PayButton = styled(TouchableOpacity).attrs({
   activeOpacity: 0.5,
-
-},
-)`
+})`
   margin-top: 80px;
- 
 `;
 export const ListButton = styled(TouchableOpacity).attrs({
   activeOpacity: 0.5,
-
-},
-)`
+})`
   flex-direction: row;
   background: #00a7aa;
   padding: 15px 30px;
