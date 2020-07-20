@@ -74,27 +74,16 @@ function SendMoney() {
     setVisible(false);
   }
 
-  // destroy db
-  async function handleDestroy() {
-    const realm = await getRealm();
-    realm.write(() => {
-      const transactions = realm.objects('Transaction');
-      console.tron.log(transactions);
-      realm.delete(transactions);
-    });
-
-  }
-
   // Transfer Money
   async function handleTransaction() {
     const realm = await getRealm();
     const prevValueContact = realm.objectForPrimaryKey('Contact', selectedContact.id);
-    console.tron.log(prevValueContact);
+
     const { tot_value } = prevValueContact;
     try {
       const formattedValue = money.split('R$');
       var formattedMoney = parseFloat(formattedValue[1]);
-      console.tron.log(formattedMoney);
+
       realm.write(() => {
         const data = {
           id: Math.floor(Math.random() * 100),
@@ -110,9 +99,6 @@ function SendMoney() {
           phone: selectedContact.phone,
           tot_value: tot_value + formattedMoney,
         };
-
-        console.tron.log(transaction);
-
       });
       Keyboard.dismiss();
       Alert.alert('Transação bem Sucedida', `R$${formattedMoney} transferido para ${selectedContact.name}!`);

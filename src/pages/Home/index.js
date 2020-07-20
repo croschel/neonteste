@@ -128,6 +128,24 @@ function Home() {
             phone: '(11) 99885-7557',
             tot_value: 0,
           };
+          const contact13 = {
+            id: 13,
+            name: 'Camila Leão',
+            phone: '(11) 99885-7557',
+            tot_value: 0,
+          };
+          const contact14 = {
+            id: 14,
+            name: 'Afonso Costa',
+            phone: '(11) 99885-7557',
+            tot_value: 0,
+          };
+          const contact15 = {
+            id: 15,
+            name: 'Breno Romero',
+            phone: '(11) 99885-7557',
+            tot_value: 0,
+          };
           realm.create('Contact', contact1);
           realm.create('Contact', contact2);
           realm.create('Contact', contact3);
@@ -140,6 +158,9 @@ function Home() {
           realm.create('Contact', contact10);
           realm.create('Contact', contact11);
           realm.create('Contact', contact12);
+          realm.create('Contact', contact13);
+          realm.create('Contact', contact14);
+          realm.create('Contact', contact15);
         });
         const createdContacts = realm.objects('Contact');
       } catch (error) {
@@ -161,7 +182,7 @@ function Home() {
       <Container>
         <LinearGradient
           colors={['#053e57', '#00fcc2']}
-          style={{ borderRadius: 90, width: 190, height: 190 }}
+          style={{ borderRadius: 90, width: 180, height: 180 }}
         >
           <Avatar source={avatar} />
         </LinearGradient>
@@ -171,7 +192,7 @@ function Home() {
           <Email>{user.email}</Email>
         </PersonBox>
         <PayButton onPress={goSendMoney}>
-          <Icon name="monetization-on" size={180} color="#00a7aa" />
+          <Icon name="monetization-on" size={170} color="#00a7aa" style={{ marginLeft: 'auto', marginRight: 'auto' }} />
         </PayButton>
         <ListButton onPress={goHistoric}>
           <Icon name="list" size={30} color="#004f84" />

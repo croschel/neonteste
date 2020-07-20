@@ -14,7 +14,7 @@ export const Contact = styled(TouchableOpacity)`
 
 export const TransferBox = styled.SafeAreaView`
   padding: 15px;
-  margin: 8%;
+  margin: 2%;
   background: #1f576b;
   border-radius: 18px;
   position: ${(props) => (props.visible ? 'absolute' : 'relative')};

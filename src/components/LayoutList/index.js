@@ -12,7 +12,7 @@ export const HeaderBox = styled.View`
 `;
 
 export const HeaderTitle = styled.Text`
-  font-size: 28px;
+  font-size: 26px;
   font-weight: bold;
   color: #fff;
   margin: 0 auto 0 auto;

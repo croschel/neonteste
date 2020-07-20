@@ -8,9 +8,9 @@ export const Container = styled.View`
 `;
 
 export const Avatar = styled.Image`
-  width: 180px;
-  height: 180px;
-  border-radius: 90px;
+  width: 170px;
+  height: 170px;
+  border-radius: 80px;
   margin: auto auto;
 `;
 export const PersonBox = styled.View`
@@ -30,18 +30,23 @@ export const Email = styled.Text`
 export const PayButton = styled(TouchableOpacity).attrs({
   activeOpacity: 0.5,
 })`
-  margin-top: 80px;
+  margin-top: 40px;
+  elevation: 8;
+  background: transparent;
+  border-radius: 90px;
+  height: 170px;
+  width: 180px;
 `;
 export const ListButton = styled(TouchableOpacity).attrs({
   activeOpacity: 0.5,
 })`
   flex-direction: row;
   background: #00a7aa;
-  padding: 15px 30px;
+  padding: 10px 25px;
   padding-bottom: 15px;
   border-radius: 30px;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 30px;
   elevation: 8;
 `;
 export const TextButton = styled.Text`
