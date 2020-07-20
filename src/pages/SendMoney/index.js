@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { Alert, Keyboard, LogBox } from 'react-native';
 import Background from '../../components/Background';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -21,6 +22,7 @@ import {
   Contact,
   TransferBox,
   HeaderTransfer,
+  CloseButton,
   ContactBox,
   ContactName,
   ContactPhone,
@@ -31,9 +33,20 @@ import {
   SubmitText,
 } from './styles';
 
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
+
 function SendMoney() {
+  // get params
+  const route = useRoute();
+  const { user } = route.params;
+
   // states
   const [contacts, setContacts] = useState([]);
+  const [money, setMoney] = useState();
+  const [visible, setVisible] = useState(false);
+  const [selectedContact, setSelectedContact] = useState({});
 
   // navigate
   const navigation = useNavigation();
@@ -50,7 +63,52 @@ function SendMoney() {
 
   // function to handle with selected contact on press
   function handleSelectedContact(contact) {
+    setSelectedContact(contact);
+    setVisible(true);
+  }
 
+  // close TransferBox
+  function handleCloseBox() {
+    setMoney(null);
+    Keyboard.dismiss();
+    setVisible(false);
+  }
+
+  // destroy db
+  async function handleDestroy() {
+    const realm = await getRealm();
+    realm.write(() => {
+      const transactions = realm.objects('Transaction');
+      console.tron.log(transactions);
+      realm.delete(transactions);
+    });
+
+  }
+
+  // Transfer Money
+  async function handleTransaction() {
+    console.tron.log(money.split('R$'));
+    const realm = await getRealm();
+    try {
+      const formattedValue = money.split('R$');
+      var formattedMoney = parseFloat(formattedValue[1]);
+      realm.write(() => {
+        const data = {
+          id: Math.floor(Math.random() * 100),
+          value: formattedMoney,
+          entryAt: new Date(),
+          user_id: user.id,
+          contact_id: selectedContact.id,
+        };
+        realm.create('Transaction', data);
+      });
+      Keyboard.dismiss();
+      Alert.alert('Transação bem Sucedida', `R$${formattedMoney} transferido para ${selectedContact.name}!`);
+      navigation.navigate('Home');
+    } catch (error) {
+      Alert.alert('Transação mal sucedida', 'Ocorreu algum problema durante a transferência');
+      return;
+    }
   }
 
   // stack functions
@@ -59,13 +117,13 @@ function SendMoney() {
   }
   return (
     <Background >
-      <HeaderBox >
+      <HeaderBox style={{ opacity: visible ? 0.09 : 1 }}>
         <BackButton onPress={goBack}>
           <Icon name="keyboard-arrow-left" size={50} color="#fff" />
         </BackButton>
         <HeaderTitle>ENVIAR DINHEIRO</HeaderTitle>
       </HeaderBox>
-      <Container >
+      <Container style={{ opacity: visible ? 0.09 : 1 }}>
         <ContactsList>
           {contacts.map((contact) => (
             <Contact
@@ -91,21 +149,23 @@ function SendMoney() {
           ))}
         </ContactsList>
       </Container>
-      <TransferBox>
+      <TransferBox visible={visible}>
         <HeaderTransfer>
-          <Icon name="cancel" size={50} color="#fff" />
+          <CloseButton onPress={handleCloseBox}>
+            <Icon name="cancel" size={50} color="#fff" />
+          </CloseButton>
           <ContactBox>
             <LinearGradient
               colors={['#053e57', '#00fcc2']}
               style={{ borderRadius: 37, width: 76, height: 76 }}>
               <Avatar
                 source={{
-                  uri: 'https://api.adorable.io/avatars/80/neon.png',
+                  uri: `https://api.adorable.io/avatars/80/neon${selectedContact.id}.png`,
                 }}
               />
             </LinearGradient>
-            <ContactName>Anderson Santos</ContactName>
-            <ContactPhone>(11)98456-8745</ContactPhone>
+            <ContactName>{selectedContact.name}</ContactName>
+            <ContactPhone>{selectedContact.phone}</ContactPhone>
           </ContactBox>
 
         </HeaderTransfer>
@@ -113,11 +173,13 @@ function SendMoney() {
           <Title>Valor a enviar:</Title>
           <InputValue
             autoCorrect={false}
-            keyboardType="number-pad"
             placeholder="R$ 0,00"
             placeholderTextColor="#09a4ab"
+            value={money}
+            onChangeText={setMoney}
+            type="money"
           />
-          <SubmitButton>
+          <SubmitButton onPress={() => handleTransaction()}>
             <SubmitText>ENVIAR</SubmitText>
           </SubmitButton>
         </FormBox>

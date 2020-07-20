@@ -6,8 +6,8 @@ const TransactionSchema = {
     id: { type: 'int', indexed: true },
     value: 'float',
     entryAt: 'date',
-    user: 'User',
-    contact: 'Contact',
+    user: { type: 'User' },
+    contact: { type: 'Contact' },
   },
 };
 

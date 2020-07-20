@@ -14,7 +14,7 @@ const Routes = () => {
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="SendMoney" component={SendMoney} />
+        <Stack.Screen name="Sendmoney" component={SendMoney} />
         <Stack.Screen name="Historic" component={Historic} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TextInputMask } from 'react-native-masked-text';
 
 export const Contact = styled(TouchableOpacity)`
   flex-direction: row;
@@ -16,13 +17,20 @@ export const TransferBox = styled.SafeAreaView`
   margin: 8%;
   background: #1f576b;
   border-radius: 18px;
+  position: ${(props) => (props.visible ? 'absolute' : 'relative')};
+  top: 25%;
+  left: 2%;
+  display: ${(props) => (props.visible ? 'flex' : 'none')};
 `;
 export const HeaderTransfer = styled.View`
   flex-direction: row;
 `;
+
+export const CloseButton = styled(TouchableOpacity)``;
+
 export const ContactBox = styled.View`
   align-items: center;
-  margin: 0 40px;
+  margin: 0 30px;
 `;
 export const ContactName = styled.Text`
   font-size: 20px;
@@ -43,7 +51,7 @@ export const Title = styled.Text`
   font-size: 18px;
   color: #fff;
 `;
-export const InputValue = styled.TextInput`
+export const InputValue = styled(TextInputMask)`
   background: #f1f1f1;
   width: 300px;
   border-radius: 10px;
@@ -58,6 +66,9 @@ export const SubmitButton = styled(TouchableOpacity)`
   background: #09a4ab;
   width: 300px;
   border-radius: 40px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 export const SubmitText = styled.Text`
   font-size: 22px;

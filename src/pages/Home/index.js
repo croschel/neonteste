@@ -130,9 +130,7 @@ function Home() {
           realm.create('Contact', contact12);
         });
         const createdContacts = realm.objects('Contact');
-        console.tron.log(createdContacts);
       } catch (error) {
-        console.tron.log(contacts);
         return;
       }
     }
@@ -141,7 +139,7 @@ function Home() {
 
   // Stack functions
   function goSendMoney() {
-    navigation.navigate('SendMoney');
+    navigation.navigate('Sendmoney', { user });
   }
   function goHistoric() {
     navigation.navigate('Historic');
