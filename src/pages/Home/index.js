@@ -60,61 +60,73 @@ function Home() {
             id: 1,
             name: 'Lais Santos',
             phone: '(11) 97654-1157',
+            tot_value: 0,
           };
           const contact2 = {
             id: 2,
             name: 'Lourdes Pereira',
             phone: '(11) 97474-1557',
+            tot_value: 0,
           };
           const contact3 = {
             id: 3,
             name: 'Carlos Magno',
             phone: '(11) 97444-1557',
+            tot_value: 0,
           };
           const contact4 = {
             id: 4,
             name: 'Marcos Campos',
             phone: '(11) 97854-4457',
+            tot_value: 0,
           };
           const contact5 = {
             id: 5,
             name: 'Bruno de Oliveira',
             phone: '(11) 97554-4457',
+            tot_value: 0,
           };
           const contact6 = {
             id: 6,
             name: 'Isis Souza',
             phone: '(11) 99954-1557',
+            tot_value: 0,
           };
           const contact7 = {
             id: 7,
             name: 'Emanuel Conseição',
             phone: '(11) 99854-1457',
+            tot_value: 0,
           };
           const contact8 = {
             id: 8,
             name: 'Felipe da Cruz',
             phone: '(11) 99324-5157',
+            tot_value: 0,
           };
           const contact9 = {
             id: 9,
             name: 'Kathlen Aparecida',
             phone: '(11) 97998-5222',
+            tot_value: 0,
           };
           const contact10 = {
             id: 10,
             name: 'Antonio Carlos',
             phone: '(11) 99885-4557',
+            tot_value: 0,
           };
           const contact11 = {
             id: 11,
             name: 'Isabela Mendes',
             phone: '(11) 97544-8989',
+            tot_value: 0,
           };
           const contact12 = {
             id: 12,
             name: 'Ursula Barbosa',
             phone: '(11) 99885-7557',
+            tot_value: 0,
           };
           realm.create('Contact', contact1);
           realm.create('Contact', contact2);

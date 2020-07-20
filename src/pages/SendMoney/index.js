@@ -87,20 +87,32 @@ function SendMoney() {
 
   // Transfer Money
   async function handleTransaction() {
-    console.tron.log(money.split('R$'));
     const realm = await getRealm();
+    const prevValueContact = realm.objectForPrimaryKey('Contact', selectedContact.id);
+    console.tron.log(prevValueContact);
+    const { tot_value } = prevValueContact;
     try {
       const formattedValue = money.split('R$');
       var formattedMoney = parseFloat(formattedValue[1]);
+      console.tron.log(formattedMoney);
       realm.write(() => {
         const data = {
           id: Math.floor(Math.random() * 100),
           value: formattedMoney,
           entryAt: new Date(),
-          user_id: user.id,
-          contact_id: selectedContact.id,
         };
-        realm.create('Transaction', data);
+
+        const transaction = realm.create('Transaction', data);
+        transaction.user = { id: user.id, name: user.name, email: user.email };
+        transaction.contact = {
+          id: selectedContact.id,
+          name: selectedContact.name,
+          phone: selectedContact.phone,
+          tot_value: tot_value + formattedMoney,
+        };
+
+        console.tron.log(transaction);
+
       });
       Keyboard.dismiss();
       Alert.alert('Transação bem Sucedida', `R$${formattedMoney} transferido para ${selectedContact.name}!`);
@@ -178,6 +190,13 @@ function SendMoney() {
             value={money}
             onChangeText={setMoney}
             type="money"
+            options={{
+              precision: 2,
+              separator: '.',
+              delimiter: '',
+              unit: 'R$',
+              suffixUnit: '',
+            }}
           />
           <SubmitButton onPress={() => handleTransaction()}>
             <SubmitText>ENVIAR</SubmitText>

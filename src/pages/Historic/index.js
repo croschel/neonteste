@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Background from '../../components/Background';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import { BarChart } from 'react-native-chart-kit';
 import { Dimensions, ScrollView } from 'react-native';
+import getRealm from '~/services/realm';
 
 import {
   Container,
@@ -20,16 +21,30 @@ import {
 } from '../../components/LayoutList';
 
 function Historic() {
+  // states
+  const [lastTransaction, setLastTransactions] = useState([]);
+
   // Variable for chart props
   const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'july'],
     datasets: [
       {
-        data: [20, 40, 28, 80, 99, 43],
+        data: [20, 40, 28, 80, 99, 43, 5],
       },
     ],
   };
 
+  // load contacts
+  useEffect(() => {
+    async function loadTransactions() {
+      const realm = await getRealm();
+      const transactions = realm.objects('Transaction');
+      console.tron.log(transactions);
+    }
+    loadTransactions();
+  }, []);
+
+  // stack functions
   const navigation = useNavigation();
   function goBack() {
     navigation.goBack();

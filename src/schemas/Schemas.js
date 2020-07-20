@@ -16,6 +16,7 @@ export const ContactSchema = {
     id: 'int',
     name: 'string',
     phone: 'string',
+    tot_value: 'float',
   },
 };
 
@@ -26,7 +27,7 @@ export const TransactionSchema = {
     id: 'int',
     value: 'float',
     entryAt: 'date',
-    user_id: 'int',
-    contact_id: 'int',
+    user: { type: 'User' },
+    contact: { type: 'Contact' },
   },
 };
